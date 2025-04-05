@@ -1,0 +1,10 @@
+1. Configure hostname to station.domain40.example.com, IP address to 172.24.40.40/24, gateway to 172.24.40.1, and DNS server to 172.24.40.1 for the primary network interface. Ensure settings are persistent.
+2. Create users named harry, natasha, and tom. Add harry and natasha to the supplementary group 'admin'. Set tom's login shell to /sbin/nologin.
+3. Create a directory named /home/admins. Set its group owner to 'admin'. Configure permissions so the owner and group members can read, write, and execute, but others have no access. Ensure new files created within /home/admins automatically inherit the 'admin' group ownership.
+4. Configure a scheduled task to run the command '/bin/echo hello' every day at 14:23 for the root user.
+5. Find all files on the entire system owned by the user 'harry' and copy them (preserving attributes if possible) into the directory /opt/dir. Ensure the target directory exists.
+6. Find all lines containing the exact text "abcde" within the file /etc/testfile and write only those lines to the file /tmp/testfile, maintaining their original order. (Assume /etc/testfile exists for testing purposes).
+7. Add a new 2 GiB swap partition to the system. Ensure it is activated and configured to be used automatically on boot, without affecting any existing swap space.
+8. Create a user named alex with UID 1234 and set their password to 'alex111'.
+9. Configure the system to use a local YUM/DNF repository located at file:///mnt (create a simple repo file named /etc/yum.repos.d/local.repo for this). Install the 'vsftpd' package using any available repository. Configure vsftpd to allow anonymous downloads (ensure anonymous_enable=YES in vsftpd.conf). Ensure the vsftpd service is running and enabled.
+10. Install the 'httpd' package. Create a simple file /var/www/html/index.html with the content "Welcome". Configure httpd (e.g., ensure the main configuration listens) so that accessing the server's primary IP address serves the content from /var/www/html/. Ensure the httpd service is running and enabled and firewall allows http access.

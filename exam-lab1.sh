@@ -166,7 +166,7 @@ echo -e "${COLOR_INFO}Evaluating Task 4: Cron Job${COLOR_RESET}" | tee -a ${REPO
 T4_SCORE=0
 T4_TOTAL=10
 CRON_CMD="/bin/echo hello"
-CRON_SCHED="23 14 \* \* \*"
+CRON_SCHED="23 14 * * *"
 # Check root's crontab for the entry
 if crontab -l -u root 2>/dev/null | grep -Fq "$CRON_SCHED $CRON_CMD"; then
     echo -e "${COLOR_OK}[OK]${COLOR_RESET}\t\t Found scheduled task for root: '$CRON_SCHED $CRON_CMD'" | tee -a ${REPORT_FILE}

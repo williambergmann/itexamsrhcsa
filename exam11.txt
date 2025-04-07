@@ -1,0 +1,43 @@
+1. Install an updated kernel package available from `http://server.domain11.example.com/pub/updates` (assume repo is configured or RPM is available).
+Configure the bootloader so this new kernel is the default boot option.
+Ensure the previously booted kernel remains available as a secondary boot option.
+(Similar to Q31/45/85).
+
+2. Configure the system as an LDAP client.
+Authenticate against `ldap://ldap.example.com` (derived from Base DN).
+Use the Base DN `dc=domain11,dc=example,dc=com`.
+Use the CA certificate from `http://host.domain11.example.com/pub/domain11.crt` for TLS encryption.
+Ensure LDAP provides account and authentication info.
+Verify user `ldapuser11` can be resolved (e.g., using `getent`).
+(Password for ldapuser11 is 'password').
+
+3. Configure the system's time synchronization client (chronyd) to use `server.domain11.example.com` as its NTP server.
+Ensure the time service is running and enabled.
+
+4. Configure autofs to automatically mount NFS home directories under `/rhome`.
+Accessing `/rhome/ldapuser11` should mount `host.domain11.example.com:/rhome/ldapuser11` with options allowing read-write access (e.g., `rw,sync`).
+Ensure the autofs service is running and enabled.
+
+5. Create a user named `alex` with UID 3400.
+Set the password for `alex` to `redhat`.
+
+6. Add a new swap partition of approximately 754 MiB to the system using available disk space.
+Ensure the swap space is activated.
+Configure the system so this new swap partition is used automatically on boot.
+Do not affect any existing swap configurations.
+
+7. Find all files on the entire system owned by the user `ira`.
+Copy these found items, preserving their attributes, into the directory `/root/findresults`.
+Ensure the target directory exists and user `ira` exists for testing.
+
+8. Find all lines containing the exact string "seismic" within the file `/usr/share/dict/words`.
+Write only these matching lines to the file `/root/wordlist`, maintaining their original order and ensuring no blank lines are added.
+
+9. Create a bzip2 compressed tar archive named `/root/backup.tar.bz2`.
+The archive must contain the complete contents of the `/usr/local` directory.
+
+10. Create a new LVM Volume Group named `datastore` with a Physical Extent (PE) size of 16 MiB using available storage.
+Within `datastore`, create a Logical Volume named `database` with a size of exactly 50 extents.
+Format `database` with the ext3 filesystem (or ext4).
+Configure it to be mounted persistently and automatically at boot on `/mnt/database`.
+(Note potential conflict with previous uses of /mnt/database).

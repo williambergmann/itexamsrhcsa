@@ -1,0 +1,40 @@
+1. Increase the size of the existing LVM logical volume `/dev/test0/testvolume1` by exactly 200 MiB.
+Ensure the filesystem on the volume is also resized online to use the new space.
+(Assume the LV exists, is mounted, and its VG has sufficient free space).
+
+2. A logical volume `/dev/test0/lvtestvolume` is mounted on `/data`.
+Increase the size of this logical volume by exactly 5 GiB.
+Add a new partition (assume space exists or a new disk is added), create a PV, and extend the 'test0' volume group if necessary to accomplish this.
+Ensure the filesystem on `/data` is resized to use the added space.
+
+3. Configure the system as an NIS client for the domain 'RHCE' using the NIS server `server1.example.com`.
+Ensure NIS user accounts (like nisuser2001) can be resolved.
+Configure autofs to automatically mount NFS home directories under `/rhome/stationx` (replace 'x' with station number, assume '1' for testing).
+Accessing `/rhome/station1/nisuser2001` should mount `192.168.0.254:/rhome/station1/nisuser2001` using options -rw,soft,intr.
+Ensure autofs service is running and enabled.
+
+4. Configure the permissions of the directory `/data` so that only the owner user and members of the owning group have full read, write, and execute access.
+Other users should have no access.
+
+5. Configure the directory `/data` so that any new files or subdirectories created within it automatically inherit the group ownership of the `/data` directory itself.
+
+6. Enable IP forwarding for IPv4 permanently on the system.
+Ensure the setting is active in the running kernel configuration.
+(Same as Q43).
+
+7. Create a user named 'eric'.
+Configure this user's account so they cannot log in interactively via a shell.
+
+8. Configure autofs to automatically mount the NFS share `server1.example.com:/data` when the directory `/mnt/data` is accessed.
+Set the mount timeout to 50 seconds and use mount options -rw,soft,intr.
+Ensure the autofs service is running and enabled.
+(Note potential conflict with previous uses of /mnt/data).
+
+9. Increase the size of the existing LVM logical volume `/dev/vg0/lv1` from its current size (assume 100MB) to exactly 500 MiB.
+Ensure the filesystem on the volume is also resized online to use the new space.
+(Assume the LV exists, is mounted, and its VG has sufficient free space).
+
+10. Create a new partition of exactly 100 MiB on an available disk.
+Format this partition with the ext3 filesystem (or ext4 if ext3 tools unavailable).
+Configure it to be mounted persistently and automatically at boot on the directory `/data`.
+(Note potential conflict with previous uses of /data).

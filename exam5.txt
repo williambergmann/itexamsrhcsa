@@ -1,0 +1,40 @@
+1. Add a new 2 GiB swap partition to the system using available disk space.
+Ensure the swap space is activated.
+Configure the system so this new swap partition is used automatically on boot.
+Do not affect any existing swap configurations.
+
+2. Enable IP forwarding for IPv4 permanently on the system.
+Ensure the setting is active in the running kernel configuration.
+
+3. Add the kernel boot parameter `kmcrl=5` to the default kernel entry in the bootloader configuration.
+Ensure this change is persistent across reboots.
+
+4. Install an updated kernel package (assume available from configured repositories or a provided RPM).
+Configure the bootloader so this newly installed kernel becomes the default option for booting.
+Ensure the previously booted kernel remains available as a secondary boot option.
+
+5. Configure the system firewall using `firewalld` to permanently REJECT all incoming traffic originating from the source network `172.25.0.0/16`.
+Ensure the rule is active in the running firewall configuration.
+
+6. Configure a new YUM/DNF software repository.
+Create a repository file (e.g., `/etc/yum.repos.d/instructor.repo`).
+Set the base URL to `http://instructor.example.com/pub/rhel6/dvd`.
+Disable GPG checking for this repository (`gpgcheck=0`).
+Verify the repository is listed by DNF/YUM.
+
+7. Configure the system's default IPv4 gateway to `192.168.0.254`.
+Ensure this setting is persistent for the primary network connection.
+
+8. Add a new 100 MiB swap partition to the system using available disk space.
+Ensure the swap space is activated.
+Configure the system so this new swap partition is used automatically on boot.
+
+9. Configure the primary network interface (e.g., eth0 or equivalent) with a static IPv4 configuration.
+Set the gateway to `192.168.0.254`.
+(Assume appropriate IP/Netmask should also be set if needed, focus is gateway persistence).
+Ensure these settings are persistent.
+
+10. Shrink the existing LVM logical volume `/dev/vo/myvol` and its underlying filesystem to a size between 200 MiB and 210 MiB.
+Assume the filesystem type supports shrinking (e.g., ext4, NOT XFS) and is currently larger.
+Ensure no data is lost during the process.
+(Note: This requires the filesystem to be unmounted during the resize process).

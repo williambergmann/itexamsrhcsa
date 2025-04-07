@@ -1,0 +1,54 @@
+1. Configure the Apache web server (`httpd`).
+Download a file from `http://instructor.example.com/pub/serverX.html` (assume accessible or create dummy) and save it as the default index page (`/var/www/html/index.html`).
+Ensure the httpd service is running and enabled to start automatically on boot.
+Ensure the firewall allows HTTP traffic.
+
+2. Create a new LVM Volume Group (choose a name, e.g., `vg0`) using available storage (assume ~500 MiB needed).
+Set the Physical Extent (PE) size for this VG to 16 MiB.
+Within this VG, create a Logical Volume named `lv0` with a size of exactly 20 extents (320 MiB).
+Format `lv0` with the ext3 filesystem (or ext4).
+Configure it to be mounted persistently and automatically at boot on the directory `/data`.
+(Note potential conflict with previous uses of /data).
+
+3. Download the file `ftp://instructor.example.com/pub/testfile` (assume available or create dummy).
+Find all lines within the downloaded file that contain any of the characters 'a', 'b', 'c', 'd', or 'e'.
+Write only these matching lines to the file `/mnt/answer`, maintaining their original order from the source file.
+Ensure the target directory `/mnt` exists.
+
+4. Ensure that SELinux is configured to operate in `enforcing` mode persistently across system reboots.
+(Same as Q75).
+
+5. Configure a new YUM/DNF software repository using the base URL `http://server.domain11.example.com/pub/x86_64/Server`.
+Ensure GPG checking is disabled (`gpgcheck=0`) and the repository is enabled (`enabled=1`).
+Verify the repository is listed by DNF/YUM.
+(Same as Q96).
+
+6. Resize the existing LVM logical volume named `vo` and its underlying filesystem to approximately 290 MiB (accept sizes between 260 MiB and 320 MiB).
+Ensure the filesystem contents remain intact and the filesystem is resized to match the new logical volume size.
+(Assume 'vo' exists, is mounted, VG has space or is extended, and filesystem type supports resize).
+(Similar to Q97).
+
+7. Create a group named `adminuser`.
+Create users `natasha` and `harry`, making `adminuser` a supplementary group for both.
+Create user `sarah` with the login shell set to `/sbin/nologin` and ensure `sarah` is NOT a member of `adminuser`.
+Set the password for `natasha`, `harry`, and `sarah` to 'redhat'.
+(Same as Q98).
+
+8. Copy the file `/etc/fstab` to `/var/tmp/fstab`.
+Configure its permissions and ACLs as follows:
+Owner must be `root`, group must be `root`.
+No user should have execute permission via standard Unix permissions.
+User `natasha` must have read and write permissions.
+User `harry` must have no permissions (neither read nor write nor execute).
+All other users (present and future) must have read permission.
+(Similar to Q99, omitting bob).
+
+9. Configure a scheduled task for the user `natasha` to run the command `/bin/echo hiya` every day at 14:23.
+Ensure the cron daemon (`crond`) is running and enabled.
+(Same as Q100).
+
+10. Create a directory named `/home/admins`.
+Set its group owner to `adminuser`.
+Ensure that members of the group `adminuser` can read, write, and access files within this directory, but other users (excluding root) cannot.
+Configure the directory so that any new files or subdirectories created inside `/home/admins` automatically inherit `adminuser` as their group owner.
+(Same as Q101).

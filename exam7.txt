@@ -1,0 +1,36 @@
+1. Describe the process to reset the root password if it is unknown, by interrupting the boot process using the GRUB bootloader.
+(Note: This task describes a procedure, direct grading is not feasible).
+
+2. Configure the system's logging service (rsyslog) to accept log messages from remote hosts over the network.
+Ensure the necessary network ports (e.g., 514/udp, 514/tcp) are open in the firewall if needed.
+
+3. Configure the system's DNS client settings to use 192.168.0.254 as the primary nameserver.
+Ensure this setting is persistent.
+
+4. Install the package `zsh` from an RPM file located at ftp://server1.example.com/pub/updates/zsh-*.rpm (assume server is 192.168.0.254 and anonymous FTP works, or file is otherwise available).
+
+5. Ensure the NFS server service (`nfs-server`) and its dependency (`rpcbind`) are running and enabled on the system.
+Verify that any NFS shares configured in `/etc/exports` are correctly exported and accessible (e.g., using `showmount -e localhost`).
+Ensure the firewall allows necessary NFS traffic.
+
+6. Create a new logical partition (using an extended partition if necessary on MBR) of exactly 100 MiB on an available disk.
+Format this partition with the ext3 filesystem (or ext4).
+Configure it to be mounted persistently and automatically at boot on the directory `/data`.
+(Note potential conflict with previous uses of /data).
+
+7. Configure the Apache web server (`httpd`) to serve HTTPS traffic on port 443 for the virtual host `www.rhce.com` (associated with IP 192.100.0.2, though specific IP binding is less common now).
+Ensure necessary SSL modules are enabled and basic SSL configuration directives (SSLEngine on, certificate/key paths) are present.
+(Assume SSL certificate/key files exist at specified paths or default locations).
+Ensure the httpd service is running and enabled, and the firewall allows HTTPS traffic.
+
+8. Configure the system's primary network interface with a static IPv4 address based on a station number (e.g., 172.24.0.<station_num>) and set the default gateway to 172.24.254.254.
+Ensure the settings are persistent.
+(Assume station number 1 for testing: IP 172.24.0.1).
+
+9. Configure the system's DNS client settings to use 172.24.254.254 as the primary nameserver.
+Ensure this setting is persistent.
+(Similar to Q64/Q3).
+
+10. Enable IP forwarding for IPv4 permanently on the system.
+Ensure the setting is active in the running kernel configuration.
+(Same as Q43/Q57).

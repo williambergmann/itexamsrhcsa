@@ -1,0 +1,46 @@
+1. Create a swap *file* named `/swapfile` with a size of 600 MiB.
+Activate this swap file.
+Configure the system so this swap file is used automatically on boot.
+
+2. Create a group named `admin`.
+Create users named `mary` and `alice`, adding both to the supplementary group `admin`.
+Create a user named `bobby` with the login shell set to `/sbin/nologin` and ensure `bobby` is NOT a member of the `admin` group.
+Set the password for mary, alice, and bobby to 'password'.
+
+3. Create the directory path `/common/admin`.
+Set its group owner to `admin`.
+Configure permissions so the owner and members of the `admin` group have full read, write, and execute access, while other users have no access.
+Ensure that any new files or subdirectories created inside `/common/admin` automatically inherit `admin` as their group owner.
+
+4. Install an updated kernel package available from `ftp://instructor.example.com/pub/updates` (assume FTP access works or package is otherwise available).
+Configure the bootloader so this new kernel is the default boot option, while ensuring the original kernel remains available for selection at boot time.
+(Similar to Q31/Q45).
+
+5. Configure a scheduled task for the user `mary` to run the command `/bin/echo "Hello World."` every day at 14:23.
+
+6. Configure the system as an LDAP client to authenticate against the LDAP directory provided by `192.168.0.254`.
+Ensure user accounts like `ldapuserX` (where X matches the local station number, assume 1 for testing) can be resolved via `getent`.
+(Assume Base DN and certificate details are handled by the configuration tool or provided elsewhere).
+
+7. Configure autofs to automatically mount NFS home directories under `/home/guests`.
+Accessing `/home/guests/ldapuserX` (where X is a number) should mount `instructor.example.com:/home/guests/ldapuserX` (assume instructor.example.com is 192.168.0.254) with read-write permissions.
+Ensure the autofs service is running and enabled.
+(Similar to Q34/Q54).
+
+8. Copy the file `/etc/fstab` to `/var/tmp/fstab`.
+Configure its permissions and ACLs as follows:
+Owner must be `root`, group must be `root`.
+User `mary` must have read and write permissions.
+User `alice` must have read and execute permissions (Note: Execute on fstab is unusual, but following Q).
+Create user `bob` with UID 1000 (or check if exists and UID matches). User `bob` must have read and write permissions.
+All other users (present and future) must have read permission.
+Ensure no user has execute permission via standard Unix permissions (though ACL might grant it to alice).
+
+9. Configure the system's time synchronization client (chronyd) using available default servers or a specified server if provided elsewhere.
+Ensure the time service (`chronyd`) is running and enabled.
+(Generic NTP setup task).
+
+10. Install the `vsftpd` package.
+Configure the vsftpd service to allow anonymous FTP logins and downloads.
+Ensure the vsftpd service is running and enabled to start automatically on boot.
+Ensure the firewall allows necessary FTP traffic (passive/active ports might be needed).
